@@ -12,14 +12,18 @@ function App() {
   }
 
   const markTaskDone = id => {
-    task.map(task => {
+    const newTaskList = tasks.map(task => {
       if(task.id === id) {
         task.done = true;
       }
-      return tasks;
+      return task;
     });
-    setTask(tasks);
+    setTask(newTaskList);
   }
+
+  const deleteTask = id => {
+    setTask(tasks.filter(task => task.id !== id));
+  };
 
   return (
     <div className="container">
@@ -30,7 +34,7 @@ function App() {
           </div>
           <NewTask createTask={createTask} />
           <br />
-          <TaskList tasks={tasks} markTaskDone={markTaskDone} />
+          <TaskList tasks={tasks} markTaskDone={markTaskDone} deleteTask={deleteTask} />
         </div>
       </div>
     </div>
